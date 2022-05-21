@@ -1,0 +1,41 @@
+#|
+Exercise 17
+
+Emilio Sibaja Villarreal
+
+08/03/2022
+|#
+
+
+#lang racket
+
+(define (count lst counter)
+  (if (empty? lst)
+      counter
+      (count (cdr lst) (+ 1 counter))))
+
+(define (sum lst)
+  (apply + lst))
+
+
+(define (square lst)
+  (apply * lst))
+   
+(define (mean lst)
+  (- (car lst) (/ (sum lst) (count lst 0))))
+           
+
+(define (standard-deviation lst)
+  (for/list ([i lst])
+    (- i 18))
+     )
+
+
+
+
+  
+
+  
+     
+
+

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="black.css">
+
+<html>
+
+<head>
+    <title> HTML CHEAT SHEET </title>
+</head>
+
+
+
+<body class="dark-mode">
+
+    <button onclick="myFunc()"> Toggle dark/light mode</button>
+
+    <script>
+        function myFunc() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+
+
+    <h1 style="text-align: center;">HTML CHEET SHEET</h1>
+
+    <!-- 1. a -->
+    <h1> 1. a </h1>
+    <p>Se utiliza para crear links con el atributo href, el cual el usuario puede acceder al clickear la palabra que se
+        encuentre entre el tag a</p>
+    <p>Ejemplo: </p>
+    <a href="http//google.com" target="_blank">Google</a>
+
+    <!-- 2. p -->
+    <h1> 2. p </h1>
+    <p> Se utiliza para crear un paragrafo, apareceran todos los caracteres que se encuentren en el tag p
+    </p>
+
+    <!-- 3. h1, h2, ..., h6 -->
+
+    <h1> 3. h1, h2, h3, h4, h5, h6 </h1>
+
+    <h1> h1 </h1>
+    <p>Se usa para hacer encabezados </p>
+
+    <h2> h2 </h2>
+    <p>Se usa para hacer subencabezados </p>
+
+    <h3>h3</h3>
+    <p>Si se necesita hacer más encabezados de los encabezados existen versiones en letra más pequeña</p>
+
+    <h4>h4</h4>
+    <p>Es el cuarto nivel de los encabezados</p>
+
+    <h5>h5</h5>
+    <p>Es el quinto nivel de los encabezados </p>
+
+    <h6>h6</h6>
+    <p>Es el último nivel de los encabezados y el más pequeño de todos </p>
+
+    <!-- 4. div -->
+    <h1> 4. div </h1>
+    <div>
+        <p>Te permite juntar un grupo de elementos en un bloque </p>
+    </div>
+
+
+    <!-- 5. span -->
+    <h1> 5. span </h1>
+
+    <p> Es el equivalente de div, y se utiliza comunmente para controlar la apariencia del contenido como el siguiente
+        ejemplo:</p>
+    <span style="color: red;">S</span>
+    <span style="color: yellow;">P</span>
+    <span style="color: blue;">A</span>
+    <span style="color: purple;">N</span>
+
+    <!-- 6. strong -->
+    <h1> 6. strong </h1>
+
+
+    <p> Se utiliza para indicar palabras de fuerte importancia y para hacerles énfasis. Hace de estas palabras en
+        <strong> negritas. </strong>
+    </p>
+
+    <!-- 7. i -->
+    <h1> 7. i </h1>
+    <p> Le hace énfasis a las palabras cambiando el estilo de la letra a <i> italicas. </i></p>
+
+    <!-- 8. u -->
+    <h1> 8. u </h1>
+    <p>Con este tag podemos <u>subrayar</u> palabras.</p>
+
+    <!-- 9. b -->
+    <h1> 9. b </h1>
+    <p>Al igual que strong, podrmos convertir las palabras en <b>negritas</b>.</p>
+
+    <!-- 10. strike (del) -->
+    <h1> 10. strike (del) </h1>
+    <p>Se utiliza para<del>tachar</del> palabras, en el código sería "del" en lugar de strike, ya que este es de una
+        version anterior a la que utilizamos. </p>
+
+    <!-- 11. Small -->
+    <h1> 11. small </h1>
+    <p>Hace el texto pequeño.</p>
+    <p><small>Como en este ejemplo.</small></p>
+
+    <!-- 12. em -->
+    <h1> 12. em </h1>
+    <p>Al igual que i, la letra cambia a <em>italicas</em></p>
+
+    <!-- 13. header -->
+    <h1> 13. header </h1>
+
+    <p>Se utiliza para especificar el título que aparece en la ventana del navegador.</p>
+
+    <!-- 14. section -->
+    <h1> 14. section </h1>
+
+    <p>Se utiliza para agrupar contenido que esté relacionado en un bloque </p>
+    <section>y hacer diferentes secciones. </section>
+
+    <!-- 15. article -->
+    <h1> 15. article </h1>
+
+    <p>Comunmente se usa como un contenedor para alguna </p>
+    <article>sección separada de las demás. </article>
+
+    <!-- 16. aside -->
+    <h1> 16. aside </h1>
+
+    <p>Se usa para incluir información que está relacionada a una sección pero que no es esencial. </p>
+    <aside>Como por ejemplo un glosario. </aside>
+
+    <!-- 17. footer  -->
+    <h1> 17. footer </h1>
+    <p>Se utiliza para incluir texto al final de una sección o también para hacer </p>
+    <footer>un pie de página.</footer>
+
+    <!-- 18. nav -->
+    <h1> 18. nav </h1>
+
+    <nav>
+        <p>Se usa generalmente para proporcionar bloques de navegación, donde generalmente se proporcionan links de la
+            misma página web.</p>
+        <p>Ejemplo: </p>
+        <ul>
+            <li> <a href=""> Inicio</a></li>
+            <li> <a href=""> Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- 19. img -->
+    <h1> 19. img </h1>
+    <p>Se utiliza para añadir imágenes a la página web, donde se necesita principalmente el atributo "src" para agregar
+        la imagen, también está "alt" para hacer una descripción de la imagen si esta no es visible y "title", para
+        colocar un título a la imagen </p>
+    <img src="https://placekitten.com/200/287" alt="Imagen de un gatito bebé" title="Kitten">
+
+    <!-- 20. br -->
+    <h1> 20. br </h1>
+    <p>Se usa para hacer un salto de linea. </p>
+    <br>
+    <p>Como en este ejemplo</p>
+
+    <!-- 21. hr -->
+
+    <h1> 21. hr </h1>
+    <p>Se usa para crear una linea de separación, comunmente usada para cambiar de un tema a a otro.</p>
+    <p>Separación</p>
+    <hr>
+    <p> de parrafo</p>
+
+    <!-- 22. form -->
+    <h1> 22. form </h1>
+
+    <p> Representa una sección la cual contiene controles interactivos para el usuario. </p>
+    <p>Se necesita usar los atributos "action" (donde se agrega un URL de donde se recive información) y "method" (que
+        tiene los métodos "get" y "post")</p>
+
+    <!-- 23. table -->
+
+    <p>Se utiliza para crear una tabla, se usan los tags "tr" para hacer las filas de la tabla y dentro de este el tag
+        "td" para añadir una celda a la fila con su respectiva información. </p>
+
+    <h1> 23. table </h1>
+    <table border="1">
+        <caption>Tabla</caption>
+
+        <tr>
+            <td>E</td>
+            <td>J</td>
+            <td>E</td>
+            <td>M</td>
+            <td>P</td>
+            <td>L</td>
+            <td>O</td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- 24. ul -->
+    <h1> 24. ul </h1>
+    <p>Lista no ordenada con bullets, se utiliza el tag "li" para agregar un elemento a la lista.</p>
+
+    <ul>
+        <li>E</li>
+        <li>j</li>
+        <li>e</li>
+        <li>m</li>
+        <li>p</li>
+        <li>l</li>
+        <li>o</li>
+
+    </ul>
+
+
+    <!-- 25. ol -->
+    <h1> 25. ol </h1>
+
+    <p>Lista ordenada con números, y al igual que el tag "ul", se utiliza el tag "li" para agregar un elemento a la
+        lista.</p>
+
+    <ol>
+        <li>E</li>
+        <li>j</li>
+        <li>e</li>
+        <li>m</li>
+        <li>p</li>
+        <li>l</li>
+        <li>o</li>
+
+    </ol>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+*{
+
+    border:  1px solid black;
+}
+
+div{
+
+    padding: 5%;
+}
+
+.container{
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+.box{
+
+    margin: 5px;
+}
+
+
+#container1{
+    justify-content: space-between;
+
+}
+
+#box4{
+    flex: 1;
+    order: 3;
+}
+
+#box5{
+    flex: 3;
+    order: 1;
+}
+
+#box6{
+    flex: 4;
+}

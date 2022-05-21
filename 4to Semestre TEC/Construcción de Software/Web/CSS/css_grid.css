@@ -1,0 +1,39 @@
+body
+{
+    background-color: gray;
+}
+
+
+.grid-container{
+    margin: 10px;
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(20px, auto);
+    grid-template-areas: 'header header header';
+    row-gap: 10px;
+    column-gap: 10px;
+    text-align: center;
+    justify-content: space-evenly;
+    justify-items: stretch; 
+    justify-self: end;
+    align-items: center;
+}
+
+.grid-item{
+    padding: 10px;
+    border: 1px white solid;
+    background-color: aqua;
+    
+}
+
+.grid-item-1{
+    grid-area: header;
+    
+}
+
+.grid-item-2{
+    grid-row: 2 / span 3;
+    grid-column: 2 / span 1;
+    
+}

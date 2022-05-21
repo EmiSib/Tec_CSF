@@ -1,0 +1,32 @@
+Students:
+
+Miguel Ángel Bustamante Pérez A01781583
+Emilio Sibaja Villarreal A01025139
+
+
+Define a module in Elixir: 
+Define a function in Elixir: 
+
+=== BNF ===
+
+<module> ::= defmodule <module_name> do <functions> end
+<module_name> ::= <capLet> | <capLet> <letters>
+<capLet> ::= A | B | C | D | E | F | G | H | I | J | K| L| M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z
+<letters> ::= <letter> | <letter> <letters> 
+<letter> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | ñ | o | p | q | r | s | t | u | v | w | x | y | z
+<functions> ::= <function> | <function> <functions> 
+<function> ::= def <function_name> <parameters> do <code> end
+<function_name> ::= <letters> | <capLet> <letters> 
+<parameters> ::= <parameter> | <parameter> , <parameters> 
+<parameter> ::= <letter> | <letter> <letters> | <capLet> <letters>
+
+=== EBNF === 
+
+MODULE ::= defmodule MODULE_NAME do [FUNCTION] end
+MODULE_NAME ::= (CAPLET | CAPLET {LETTER})
+CAPLET ::= (A | B | C | D | E | F | G | H | I | J | K| L| M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z)
+LETTER ::= (a | b | c | d | e | f | g | h | i | j | k | l | m | n | ñ | o | p | q | r | s | t | u | v | w | x | y | z)
+FUNCTION ::= def FUNCTION_NAME {PARAMETER} do {CODE} end 
+FUNCTION_NAME ::= ({LETTER} | CAPLET {LETTER})
+PARAMETER ::= ({LETTER,} | {CAPLET LETTER,})
+

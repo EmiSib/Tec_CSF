@@ -1,0 +1,207 @@
+#|
+Simple implementation of a Deterministic Finite Automaton
+Identify all the token types found in the input string
+Return a list of tokens found
+Used to validate input strings
+Example calls:
+(automaton-2 (dfa-str 'start '(int var) delta-arithmetic-1) "34+9/du*23123")
+Miguel Bustamante
+2022-03-18
+|#
+
+#lang racket
+
+(require racket/trace)
+
+(provide arithmetic-lexer)
+
+; Structure that describes a Deterministic Finite Automaton
+(struct dfa-str (initial-state accept-states transitions))
+
+(define (arithmetic-lexer input-string)
+  " Entry point for the lexer "
+  (automaton-2 (dfa-str 'start '(int var) delta-arithmetic-1) input-string))
+
+(define (automaton-2 dfa input-string)
+  " Evaluate a string to validate or not according to a DFA.
+  Return a list of the tokens found"
+  (trace-let loop
+    ([state (dfa-str-initial-state dfa)]    ; Current state
+     [chars (string->list input-string)]    ; List of characters
+     [result null])                         ; List of tokens found
+    (if (empty? chars)
+      ; Check that the final state is in the accept states list
+      ;(member state (dfa-str-accept-states dfa))
+      (if (member state (dfa-str-accept-states dfa))
+        (reverse (cons state result)) #f)
+      ; Recursive loop with the new state and the rest of the list
+      (let-values
+        ; Get the new token found and state by applying the transition function
+        ([(token state) ((dfa-str-transitions dfa) state (car chars))])
+        (loop
+          state
+          (cdr chars)
+          ; Update the list of tokens found
+          (if token (cons token result) result))))))
+
+(define (operator? char)
+    (member char '(#\+ #\- #\* #\/ #\^ #\=)))
+
+(define (sign? char)
+    (member char '(#\+ #\-) ))
+
+(define (par_i? char)
+    (member char ' (#\( ) ))
+
+(define (par_c? char)
+    (member char ' (#\) ) ))
+
+(define (o_space? char)
+    (member char ' (#\space)))
+
+(define (n_space? char)
+    (member char ' (#\space)))
+
+(define (pre_comment? char)
+    (member char ' (#\/ ) ))
+
+(define (comment? char)
+    (member char ' (#\/ ) ))
+
+(define (scientific? char)
+    (member char '(#\E #\e )))
+
+(define (dot? char)
+    (member char '(#\. )))
+
+(define (sign_exp? char)
+  (member char ' (#\+ #\-) ))
+
+(define (delta-arithmetic-1 state character)
+  " Transition to identify basic arithmetic operations "
+  (case state
+    ['start (cond
+              [(char-numeric? character) (values #f 'int)]
+              [(sign? character) (values #f 'n_sign)]
+              [(or (char-alphabetic? character) (eq? character #\_)) 
+              (values #f 'var)]
+              [(par_i? character) (values #f 'par_i)]
+              [(pre_comment? character) (values #f 'comm)]
+              [(o_space? character) (values #f 'oSpace)]
+              [else (values #f 'fail)])]
+
+    ['n_sign (cond
+               [(char-numeric? character) (values #f 'int)]
+               [else (values #f 'fail)])]
+
+    ['int (cond
+              [(char-numeric? character) (values #f 'int)]
+              [(operator? character) (values 'int 'op)]
+              [(dot? character) (values #f 'dot)]
+              [(pre_comment? character) (values #f 'pre_comm)]
+              [(par_c? character) (values #f 'par_c)]
+              [(n_space? character) (values #f 'nSpace)]
+              [(scientific? character) (values #f 'exp)]
+              [else (values #f 'fail)])]
+    ['var (cond
+            [(or (char-alphabetic? character) (eq? character #\_)) 
+            (values #f 'var)]
+            [(char-numeric? character) (values #f 'var)]
+            [(operator? character) (values 'var 'op)]
+            [(pre_comment? character) (values #f 'pre_comm)]
+            [(par_c? character) (values #f 'par_c)]
+            [(n_space? character) (values #f 'nSpace)]
+            [else (values #f 'fail)])]
+    ['op (cond
+           [(char-numeric? character) (values 'op 'int)]
+           [(sign? character) (values 'op 'n_sign)]
+           [(o_space? character) (values #f 'oSpace)]
+           [(par_i? character) (values #f 'par_i)]
+           [(or (char-alphabetic? character) (eq? character #\_)) (values 'op 'var)]
+           [else (values #f 'fail)])]
+
+    ['dot (cond
+          [(char-numeric? character) (values 'dot 'float)]
+          [else (values #f 'fail)])]
+
+    ['float(cond
+          [(char-numeric? character) (values #f 'float)]
+          [(scientific? character) (values #f 'exp)]
+          [(n_space? character) (values #f 'nSpace)]
+          [(pre_comment? character) (values #f 'pre_comm)]
+          [(operator? character) (values 'float 'op)]
+          [else (values #f 'fail)])]
+
+    ['pre_comm(cond
+          [(pre_comment? character) (values 'pre_comm 'comm)]
+          [else (values #f 'fail)])]
+
+    ['comm(cond
+          [else (values #f 'fail)])]
+    
+    ['oSpace(cond
+          [(char-numeric? character) (values 'oSpace 'int)]
+          [(sign? character) (values 'oSpace 'n_sign)]
+          [(o_space? character) (values #f 'oSpace)]
+          [else (values #f 'fail)])]
+
+    ['nSpace(cond
+          [(par_c? character) (values 'nSpace 'par_c)]
+          [(operator? character) (values 'nSpace 'op)]
+          [(n_space? character) (values #f 'nSpace)]
+          [else (values #f 'fail)])]
+
+    ['par_i(cond
+          [(char-numeric? character) (values 'par_i 'int)]
+          [(or (char-alphabetic? character) (eq? character #\_)) (values 'par_i 'var)]
+          [(n_space? character) (values 'par_i 'nSpace)]
+          [else (values #f 'fail)])]
+
+    ['par_c(cond
+          [(pre_comment? character) (values 'par_c 'pre_comm)]
+          [else (values #f 'fail)])]
+
+          
+    ['exp(cond
+          [(char-numeric? character) (values 'exp 'int_exp)]
+          [(sign? character) (values 'exp 'sign_exp)]
+          [else (values #f 'fail)])]
+
+    ['int_exp(cond
+          [(char-numeric? character) (values #f 'int_exp)]
+          [(pre_comment? character) (values #f 'pre_comm)]
+          [(n_space? character) (values #f 'nSpace)]
+          [(operator? character) (values 'int_exp 'op)]
+          [(par_c? character) (values 'int_exp 'par_c)]
+          [else (values #f 'fail)])]
+
+    ['sign_exp(cond
+            [(char-numeric? character) (values 'sign_exp 'int_exp)]
+            [else (values #f 'fail)])]
+
+    ['fail (values #f 'fail)]))
+
+    ; Import library for unit testing
+(require rackunit)
+; Import necesary to view the test results
+(require rackunit/text-ui)
+
+(define test-arithmetic-lexer
+    (test-suite
+        " Test function: arithmetic-lexer"
+        (check-equal? (arithmetic-lexer "2") '(int) "Single digit")
+        (check-equal? (arithmetic-lexer "261") '(int) "Multi digit int")
+        (check-equal? (arithmetic-lexer "2+1") '(int op int) "Binary operation")
+        (check-equal? (arithmetic-lexer "2 + 1") '(int op int) "Binary operation with spaces")
+        (check-equal? (arithmetic-lexer "6 = 2 + 1") '(int op int op int) "Multiple operators")
+        (check-equal? (arithmetic-lexer "97 /6 = 2 + 1") '(int op int op int op int) "Multiple operators")
+        (check-equal? (arithmetic-lexer "6 = 2 + 1") '(("6" int) ("=" op) ("2" int) ("+" op) ("1" int)) "Multiple operators with spaces")
+        (check-equal? (arithmetic-lexer "97 /6 = 2 + 1") '(("97" int) ("/" op) ("6" int) ("=" op) ("2" int) ("+" op) ("1" int)) "Multiple operators")
+        (check-equal? (arithmetic-lexer "7.4 ^3 = 2.0 * 1") '(("7.4" float) ("^" op) ("3" int) ("=" op) ("2.0" float) ("*" op) ("1" int)) "Multiple float operators with spaces")
+        (check-equal? (arithmetic-lexer "  2 + 1") '(("2" int) ("+" op) ("1" int)) "Spaces before")
+        (check-equal? (arithmetic-lexer "  2 + 1 ") '(("2" int) ("+" op) ("1" int)) "Spaces before and after")
+    ))
+
+; Start the execution of the test suite
+(displayln "Testing: arithmetic-lexer")
+(run-tests test-arithmetic-lexer)
