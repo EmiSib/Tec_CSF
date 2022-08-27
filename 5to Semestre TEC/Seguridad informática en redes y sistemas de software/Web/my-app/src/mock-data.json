@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "fullName": "Emilio Sibaja",
+      "address": "21",
+      "phoneNumber": "5565544812",
+      "email": "A01025139@tec.mx"
+    },
+    {
+      "id": 2,
+      "fullName": "Iván Díaz",
+      "address": "87",
+      "phoneNumber": "---",
+      "email": "A01628392@tec.mx"
+    },
+    {
+      "id": 3,
+      "fullName": "Rodrigo Villarreal",
+      "address": "23",
+      "phoneNumber": "7561144855",
+      "email": "A01028432@tec.mx"
+    }    
+  ]
