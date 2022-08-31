@@ -1,0 +1,43 @@
+html{
+
+word-wrap: break-word
+
+}
+
+body 
+{
+background-color: rgb(180, 189, 58);
+}
+
+h1 
+{
+text-align: center;
+color: black;
+}
+
+p 
+{
+    
+color: black;
+}
+
+
+
+.cipher 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.decipher
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    margin-top: 15px;
+    width: 50%;
+}
