@@ -4,11 +4,10 @@
         <title>Carga de archivos</title>
     </head>
     <body>
-      
-        <form action="/carga" enctype="multipart/form-data" method="POST">
-            <input type="text" value="Nombre">
-            <input type="file" name="" id="Archivo">
-            <input type="submit" name="" id="Sube archivo">
+        <form action="/cargar" enctype="multipart/form-data" method="POST">
+            <input type="text" name="nombre"/>
+            <input type="file" name="archivo"/>
+            <input type="submit" value="Sube el archivo"/>
         </form>
     </body>
 </html>
